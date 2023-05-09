@@ -29,8 +29,6 @@ namespace TESTS_VK_ASP_NET_API
         public async Task TestGetAllWithCorrectAuthorizationHeader()//Попытка получения всех пользователей с правильными данными для basic авторизации
         {
             // Arrange
-            _client.BaseAddress = new Uri("https://localhost:44311/");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "VVNFUjpVU0VS");
 
             // Act
             var response = await _client.GetAsync("Users?page=1&pageSize=10");
@@ -58,8 +56,6 @@ namespace TESTS_VK_ASP_NET_API
         public async Task TestGetWithExistingId()//Попытка получения пользователя по существующему в БД Id
         {
             // Arrange
-            _client.BaseAddress = new Uri("https://localhost:44311/");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "VVNFUjpVU0VS");
 
             // Act
             var response = await _client.GetAsync("Users/1");
@@ -73,8 +69,6 @@ namespace TESTS_VK_ASP_NET_API
         public async Task TestGetWithNotExistingId()//Попытка получения пользователя по несуществующему в БД Id
         {
             // Arrange
-            _client.BaseAddress = new Uri("https://localhost:44311/");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "VVNFUjpVU0VS");
 
             // Act
             var response = await _client.GetAsync("Users/23");
@@ -88,9 +82,6 @@ namespace TESTS_VK_ASP_NET_API
         public async Task TestAddUserWithCorrectJSON()//Попытка добавления пользователя с корректными входными данными в формате JSON
         {
             // Arrange
-            _client.BaseAddress = new Uri("https://localhost:44311/");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "VVNFUjpVU0VS");
-
             var request = new HttpRequestMessage(HttpMethod.Post, "Users");
             request.Content = new StringContent(@"{
                 ""id"": 6,
@@ -123,9 +114,6 @@ namespace TESTS_VK_ASP_NET_API
         public async Task TestAddUserWithCorrectJSONButLoginAlreadyExists()//Попытка добавления пользователя с корректными входными данными в формате JSON, но такой логин уже существует в БД.
         {
             // Arrange
-            _client.BaseAddress = new Uri("https://localhost:44311/");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "VVNFUjpVU0VS");
-
             var request = new HttpRequestMessage(HttpMethod.Post, "Users");
             request.Content = new StringContent(@"{
                 ""id"": 6,
@@ -158,9 +146,6 @@ namespace TESTS_VK_ASP_NET_API
         public async Task TestAddUserWithCorrectJSONButTryingToAddSecondAdmin()//Попытка добавления пользователя с корректными входными данными в формате JSON, но мы пытаемся добавить больше 1 админа.
         {
             // Arrange
-            _client.BaseAddress = new Uri("https://localhost:44311/");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "VVNFUjpVU0VS");
-
             var request = new HttpRequestMessage(HttpMethod.Post, "Users");
             request.Content = new StringContent(@"{
                 ""id"": 6,
@@ -193,9 +178,6 @@ namespace TESTS_VK_ASP_NET_API
         public async Task TestAddUserWithCorrectJSONButInvalidUserGroup()//Попытка добавления пользователя с корректными входными данными в формате JSON, но поле User Group некорректно.
         {
             // Arrange
-            _client.BaseAddress = new Uri("https://localhost:44311/");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "VVNFUjpVU0VS");
-
             var request = new HttpRequestMessage(HttpMethod.Post, "Users");
             request.Content = new StringContent(@"{
                 ""id"": 6,
@@ -228,9 +210,6 @@ namespace TESTS_VK_ASP_NET_API
         public async Task TestAddUserWithCorrectJSONButInvalidUserState()//Попытка добавления пользователя с корректными входными данными в формате JSON, но поле User State некорректно.
         {
             // Arrange
-            _client.BaseAddress = new Uri("https://localhost:44311/");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "VVNFUjpVU0VS");
-
             var request = new HttpRequestMessage(HttpMethod.Post, "Users");
             request.Content = new StringContent(@"{
                 ""id"": 6,
@@ -263,8 +242,6 @@ namespace TESTS_VK_ASP_NET_API
         public async Task TestDeleteExistingId()//Попытка удаления пользователя с существующим Id.
         {
             // Arrange
-            _client.BaseAddress = new Uri("https://localhost:44311/");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "VVNFUjpVU0VS");
 
             // Act
             var response = await _client.DeleteAsync("Users/5");
@@ -278,8 +255,6 @@ namespace TESTS_VK_ASP_NET_API
         public async Task TestDeleteNotExistingId()//Попытка удаления пользователя с несуществующим Id.
         {
             // Arrange
-            _client.BaseAddress = new Uri("https://localhost:44311/");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "VVNFUjpVU0VS");
 
             // Act
             var response = await _client.DeleteAsync("Users/23");
@@ -293,8 +268,6 @@ namespace TESTS_VK_ASP_NET_API
         public async Task TestDeleteAdmin()//Попытка удаления учётки админа.
         {
             // Arrange
-            _client.BaseAddress = new Uri("https://localhost:44311/");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "VVNFUjpVU0VS");
 
             // Act
             var response = await _client.DeleteAsync("Users/1");
